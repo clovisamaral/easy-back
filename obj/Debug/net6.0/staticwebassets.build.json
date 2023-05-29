@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "FFXcz6eeCzz8umvgJxf1h7WPv8yv7sfI4mAb4VzwtRs=",
+  "Source": "EasyInvoice.API",
+  "BasePath": "_content/EasyInvoice.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
