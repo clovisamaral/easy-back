@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("395bf2a6-90e7-4ab8-a7a5-9bf4a7cc93e8")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("EasyInvoice.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
