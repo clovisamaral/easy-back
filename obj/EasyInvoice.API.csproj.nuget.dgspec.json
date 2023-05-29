@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "G:\\ULBRA\\EVS\\EasyInvoice\\EasyInvoice.API\\EasyInvoice.API.csproj": {}
+    "G:\\ULBRA\\EVS\\Deploy\\Backend\\easy-back\\EasyInvoice.API.csproj": {}
   },
   "projects": {
-    "G:\\ULBRA\\EVS\\EasyInvoice\\EasyInvoice.API\\EasyInvoice.API.csproj": {
+    "G:\\ULBRA\\EVS\\Deploy\\Backend\\easy-back\\EasyInvoice.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\ULBRA\\EVS\\EasyInvoice\\EasyInvoice.API\\EasyInvoice.API.csproj",
+        "projectUniqueName": "G:\\ULBRA\\EVS\\Deploy\\Backend\\easy-back\\EasyInvoice.API.csproj",
         "projectName": "EasyInvoice.API",
-        "projectPath": "G:\\ULBRA\\EVS\\EasyInvoice\\EasyInvoice.API\\EasyInvoice.API.csproj",
+        "projectPath": "G:\\ULBRA\\EVS\\Deploy\\Backend\\easy-back\\EasyInvoice.API.csproj",
         "packagesPath": "C:\\Users\\clovi\\.nuget\\packages\\",
-        "outputPath": "G:\\ULBRA\\EVS\\EasyInvoice\\EasyInvoice.API\\obj\\",
+        "outputPath": "G:\\ULBRA\\EVS\\Deploy\\Backend\\easy-back\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\clovi\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -67,6 +67,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.15, )"
+            },
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.17.2, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

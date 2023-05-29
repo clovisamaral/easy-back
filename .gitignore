@@ -1,0 +1,50 @@
+# Arquivos de compilação .NET
+obj/
+bin/
+*.dll
+*.exe
+*.pdb
+*.user
+
+# Arquivos de publicação
+*.sw?
+*.publishsettings
+_PublishedWebsites/
+pubxml/
+
+# Logs e arquivos temporários
+*.log
+*.vspscc
+*.vssscc
+*.tmp
+*.user
+*.suo
+*.cache
+*.ncrunch*
+*~
+*.dbmdl
+
+# Pacotes NuGet
+*.nupkg
+*.pdb
+*.cache
+*.exe
+packages/
+*.dll
+*.exe
+
+# Arquivos de configuração
+*.config
+*.config.user
+*.bak
+*.bak.*
+*.[Cc]ache
+*.local.*
+*.testsettings
+*.runsettings
+*.pubxml
+*.Publish.xml
+*.pfx
+*.snk
+*.usersettings
+*.pubxml.user
