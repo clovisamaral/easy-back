@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6fdA0v4OvxYsHPNReoCFgzD4WMISxoKXSzEvFsKyhlJJsVdUY+wB/rvI0HOgB44BaVzzFsjblS3wGdX6IYhC/g==",
+  "dgSpecHash": "eCETAD5TYLyyunCK6BzEjlQXfF8XduwCVRCCS3GrPV+JFKpazrzkKufwEZNALsbSEDvWbhfBdpGCs4XtyC8RaQ==",
   "success": true,
-  "projectFilePath": "G:\\ULBRA\\EVS\\EasyInvoice\\EasyInvoice.API\\EasyInvoice.API.csproj",
+  "projectFilePath": "G:\\ULBRA\\EVS\\Deploy\\Backend\\easy-back\\EasyInvoice.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\clovi\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
     "C:\\Users\\clovi\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
@@ -27,6 +27,7 @@
     "C:\\Users\\clovi\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
     "C:\\Users\\clovi\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
     "C:\\Users\\clovi\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\clovi\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.2\\microsoft.visualstudio.azure.containers.tools.targets.1.17.2.nupkg.sha512",
     "C:\\Users\\clovi\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\clovi\\.nuget\\packages\\sqlite-net\\1.6.292\\sqlite-net.1.6.292.nupkg.sha512",
     "C:\\Users\\clovi\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.2\\sqlitepclraw.bundle_e_sqlite3.2.1.2.nupkg.sha512",
