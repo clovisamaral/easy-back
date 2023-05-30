@@ -1,18 +1,22 @@
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
-# copia csproj e restaura as camadas
-COPY *.csproj ./
+# Copy and restore project files
+COPY EasyInvoice.API.csproj .
 RUN dotnet restore
 
-# copia tudo e builda
-COPY . ./
+# Copy the entire project and build
+COPY . .
 RUN dotnet publish "EasyInvoice.API.csproj" -c Release -o out
 
-# builda com a imagem do runtime
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
+# Runtime stage
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
 WORKDIR /app
-COPY --from=build-env /app/out .
+COPY --from=build /app/out ./
 
-#ENTRYPOINT ["dotnet", "EasyInvoice.API.dll"]
-CMD ASPNETCORE_URLS="http://*:$PORT" dotnet EasyInvoice.API.dll
+# Expose port 80
+EXPOSE 5000
+
+# Set the entry point for the container
+ENTRYPOINT ["dotnet", "EasyInvoice.API.dll"]
