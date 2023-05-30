@@ -16,7 +16,7 @@ namespace EasyInvoice.API.Repositories.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=easyInvoice.db");
+            optionsBuilder.UseNpgsql("Server=easy-invoices-db.postgres.database.azure.com;Database=postgres;User Id=useradmdb;Password=33sf89xxYY*@;Ssl Mode=Require;Port=5432;TrustServerCertificate=True;");
         }
     }
 }
