@@ -33,7 +33,7 @@ namespace EasyInvoice.API.Repositories.Relationships
             .Join(_Db.Providers, relation => relation.ProviderId, provider => provider.Id, (relation, provider) => new { relation, provider })
             .Where(p=>p.provider.Active==true)
             .Join(_Db.Clients, relation1 => relation1.relation.ClientId, client => client.Id, (relation1, client) => new { relation1, client })
-            .Where(c => c.client.Active == true)
+            //.Where(c => c.client.Active == true)
             .Select(x => new RelationshipResponse
             {
                 Id = x.relation1.relation.Id,
