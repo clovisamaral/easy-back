@@ -6,7 +6,7 @@ namespace EasyInvoice.API.Repositories.Interfaces
     {
         Task<Client> GetByIdAsync(int id);
         Task<Client> GetByNameAsync(string name);
-        Task<List<Client>> GetAllAsync();
+        Task<List<Client>> GetAllAsync(bool all=true);
         Task<Client> AddAsync(Client client);
         Task UpdateAsync(Client client);
         Task DeleteAsync(int id);
