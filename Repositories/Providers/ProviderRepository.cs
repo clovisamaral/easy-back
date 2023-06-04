@@ -26,9 +26,13 @@ namespace EasyInvoice.API.Repositories.Providers
             _Db.Providers.Remove(response);
             await _Db.SaveChangesAsync();
         }
-        public Task<List<Provider>> GetAllAsync()
+        public async Task<List<Provider>> GetAllAsync(bool all = true)
         {
-            return _Db.Providers.ToListAsync();
+            var results = all == true ?
+                    await _Db.Providers.ToListAsync() :
+                    await _Db.Providers.Where(x => x.Active == true)
+                    .ToListAsync();
+            return results;
         }
         public async Task<Provider> GetByIdAsync(int id)
         {
