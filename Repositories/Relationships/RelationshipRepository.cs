@@ -1,5 +1,4 @@
-﻿using EasyInvoice.API.Entities.Clients;
-using EasyInvoice.API.Entities.Dto;
+﻿using EasyInvoice.API.Entities.Dto;
 using EasyInvoice.API.Entities.Relationships;
 using EasyInvoice.API.Repositories.Context;
 using EasyInvoice.API.Repositories.Interfaces;
@@ -33,7 +32,6 @@ namespace EasyInvoice.API.Repositories.Relationships
         {
             List<RelationshipResponse> results = await _Db.Relationships
             .Join(_Db.Providers, relation => relation.ProviderId, provider => provider.Id, (relation, provider) => new { relation, provider })
-            .Where(p => p.provider.Active == true)
             .Join(_Db.Clients, relation1 => relation1.relation.ClientId, client => client.Id, (relation1, client) => new { relation1, client })
             .Select(x => new RelationshipResponse
             {
