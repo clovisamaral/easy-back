@@ -38,9 +38,9 @@ namespace EasyInvoice.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] bool all)
         {
-            var response = await providerRepository.GetAllAsync();
+            var response = await providerRepository.GetAllAsync(all);
             return Ok(response);
         }
 
