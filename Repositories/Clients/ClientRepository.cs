@@ -26,9 +26,12 @@ namespace EasyInvoice.API.Repositories.Clients
             _Db.Clients.Remove(response);
             await _Db.SaveChangesAsync();
         }
-        public async Task<List<Client>> GetAllAsync()
+        public async Task<List<Client>> GetAllAsync(bool all = true)
         {
-            var results = await _Db.Clients.ToListAsync();
+            var results = all == true ? 
+                    await _Db.Clients.ToListAsync() : 
+                    await _Db.Clients.Where(x => x.Active == true)
+                    .ToListAsync();
             return results;
         }
         public async Task<Client> GetByIdAsync(int id)
@@ -38,7 +41,7 @@ namespace EasyInvoice.API.Repositories.Clients
 
         public async Task<Client> GetByNameAsync(string name)
         {
-            return await _Db.Clients.FirstOrDefaultAsync(x => x.Name == name);   
+            return await _Db.Clients.FirstOrDefaultAsync(x => x.Name == name);
         }
 
         public async Task UpdateAsync(Client client)
