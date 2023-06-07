@@ -1,5 +1,6 @@
 ﻿using EasyInvoice.API.Entities.Clients;
 using EasyInvoice.API.Repositories.Interfaces;
+using EasyInvoice.API.Shared;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 
