@@ -1,5 +1,8 @@
-﻿using EasyInvoice.API.Services;
+﻿using EasyInvoice.API.Repositories.Interfaces;
+using EasyInvoice.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 namespace EasyInvoice.API.Controllers
 {
@@ -7,39 +10,39 @@ namespace EasyInvoice.API.Controllers
     [ApiController]
     public class BotController : ControllerBase
     {
+        private readonly IInvoiceRepository _invoiceRepository;
+
+        public BotController(IInvoiceRepository invoiceRepository)
+        {
+            this._invoiceRepository = invoiceRepository;
+        }
+
         [HttpGet]
-        public IActionResult GetFaturas(string codigoImovel, string cpf)
+        public IActionResult DownloadAndExtractInvoices(string codigoImovel, string cpf)
         {
             try
             {
                 var bot = new BotService();
-                bot.RunTask(codigoImovel,cpf);
+                bot.RunTask(codigoImovel, cpf);
 
-                return Ok(new { message = "Baixa de faturas concluída com sucesso" });
+                foreach (var invoice in bot.GetInvoicesList())
+                {
+                    _invoiceRepository.AddAsync(invoice);
+                }
+                return Ok(new { message = "Baixa de faturas e inserção em database concluída com sucesso" });
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new Exception($"Ocorreu erro no processo de baixar faturas: {ex.Message}");
+            }
+            catch (PostgresException ex)
+            {
+                throw new Exception($"Ocorreu erro no processo de baixar faturas: {ex.Message}");
             }
             catch (Exception ex)
             {
                 throw new Exception($"Ocorreu erro no processo de baixar faturas: {ex.Message}");
             }
-
-        }
-
-        [HttpGet]
-        [Route("{pathFull}")]
-        public IActionResult GetTextPDF(string pathFull)
-        {
-            try
-            {
-                var bot = new BotService();
-                bot.ExtractDataInvoice(pathFull);
-
-                return Ok(new { message = "Extract de faturas concluída com sucesso" });
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Ocorreu erro no processo de extrais faturas: {ex.Message}");
-            }
-
         }
     }
 }

@@ -13,10 +13,15 @@ namespace EasyInvoice.API.Repositories.Invoices
         {
             _Db = dataContext;
         }
-        public async Task<Invoice> AddAsync(Invoice invoice)
+
+        public InvoiceRepository()
         {
-            await _Db.AddAsync(invoice);
-            await _Db.SaveChangesAsync();
+        }
+
+        public Invoice AddAsync(Invoice invoice)
+        {
+            _Db.Add(invoice);
+            _Db.SaveChanges();
 
             return invoice;
         }
