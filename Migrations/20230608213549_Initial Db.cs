@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -24,6 +25,27 @@ namespace EasyInvoice.API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Clients", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Invoices",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Competence = table.Column<string>(type: "text", nullable: true),
+                    DateIssue = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    InvoiceNumber = table.Column<string>(type: "text", nullable: true),
+                    ClientName = table.Column<string>(type: "text", nullable: true),
+                    Address = table.Column<string>(type: "text", nullable: true),
+                    ContractCode = table.Column<string>(type: "text", nullable: true),
+                    Consumption = table.Column<string>(type: "text", nullable: true),
+                    DueDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Amount = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Invoices", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -66,6 +88,9 @@ namespace EasyInvoice.API.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Clients");
+
+            migrationBuilder.DropTable(
+                name: "Invoices");
 
             migrationBuilder.DropTable(
                 name: "Providers");
