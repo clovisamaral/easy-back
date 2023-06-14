@@ -100,9 +100,17 @@
               "target": "Package",
               "version": "[6.2.3, )"
             },
+            "WebDriverManager": {
+              "target": "Package",
+              "version": "[2.16.2, )"
+            },
             "iTextSharp": {
               "target": "Package",
               "version": "[5.5.13.3, )"
+            },
+            "prmToolkit.Selenium": {
+              "target": "Package",
+              "version": "[1.0.3, )"
             }
           },
           "imports": [
