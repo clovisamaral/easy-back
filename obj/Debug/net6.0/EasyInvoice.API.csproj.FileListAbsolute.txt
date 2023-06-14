@@ -76,6 +76,7 @@ G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\EasyInvoice.API.deps.json
 G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\EasyInvoice.API.runtimeconfig.json
 G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\EasyInvoice.API.dll
 G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\EasyInvoice.API.pdb
+G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\AngleSharp.dll
 G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\Azure.AI.FormRecognizer.dll
 G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\Azure.Core.dll
 G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\Azure.Storage.Blobs.dll
@@ -97,14 +98,18 @@ G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\Newtonsoft.Json.dll
 G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\Npgsql.dll
 G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\OpenQA.Selenium.Chrome.ChromeDriverExtensions.dll
+G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\prmToolkit.Selenium.dll
 G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\WebDriver.dll
+G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\Selenium.WebDriverBackedSelenium.dll
 G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\SeleniumExtras.WaitHelpers.dll
+G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\ICSharpCode.SharpZipLib.dll
 G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
 G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\System.IO.Hashing.dll
 G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\System.Memory.Data.dll
+G:\ULBRA\EVS\Deploy\Backend\easy-back\bin\Debug\net6.0\WebDriverManager.dll
 G:\ULBRA\EVS\Deploy\Backend\easy-back\obj\Debug\net6.0\EasyInvoice.API.csproj.AssemblyReference.cache
 G:\ULBRA\EVS\Deploy\Backend\easy-back\obj\Debug\net6.0\EasyInvoice.API.GeneratedMSBuildEditorConfig.editorconfig
 G:\ULBRA\EVS\Deploy\Backend\easy-back\obj\Debug\net6.0\EasyInvoice.API.AssemblyInfoInputs.cache

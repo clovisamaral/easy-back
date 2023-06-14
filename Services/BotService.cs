@@ -8,6 +8,10 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System.Text.RegularExpressions;
+using WebDriverManager;
+using WebDriverManager.DriverConfigs.Impl;
+using WebDriverManager.Helpers;
+
 
 namespace EasyInvoice.API.Services
 {
@@ -20,14 +24,11 @@ namespace EasyInvoice.API.Services
         public bool RunTask(string codigoImovel, string cpf)
         {
             bool statusExec = false;
-            ChromeOptions ChromeOptions = new ChromeOptions();
-
             string containerNamePrincipal = "faturas";
 
             try
             {
                 BlobServiceClient blobServiceClient = new BlobServiceClient("DefaultEndpointsProtocol=https;AccountName=easyinvoicesblob;AccountKey=eliDk5eEnMGdEERJ5YZUxhbrJGIxNEmR5lk7d/8DQJBQVPW8PX4tFuUrTouF6Eu4/95z0r9h7JH9+AStDxTfNg==;EndpointSuffix=core.windows.net");
-
                 BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerNamePrincipal);
                 containerClient.CreateIfNotExists();
 
@@ -38,75 +39,59 @@ namespace EasyInvoice.API.Services
                     Directory.CreateDirectory(_downloadDirectory);
                 }
 
-                ChromeOptions.AddUserProfilePreference("download.default_directory", _downloadDirectory);
-                ChromeOptions.AddUserProfilePreference("download.prompt_for_download", false);
+                new DriverManager().SetUpDriver(new ChromeConfig(), VersionResolveStrategy.Latest);
 
-                //ChromeOptions.AddArguments("--headless");
-                ChromeOptions.AddArguments("--incognito");
-                ChromeOptions.AddArgument("--disable-extensions");
-                ChromeOptions.AddArgument("--disable-gpu");
+                var options = new ChromeOptions();
 
+                options.AddUserProfilePreference("download.default_directory", _downloadDirectory);
+                options.AddUserProfilePreference("download.prompt_for_download", false);
 
-                using (var webDriver = new ChromeDriver(ChromeOptions))
+                //options.AddArgument("--headless");
+                options.AddArgument("--disable-extensions");
+                options.AddArgument("--disable-gpu");
+
+                ChromeDriverService service = ChromeDriverService.CreateDefaultService(); ChromeDriver driver = new ChromeDriver(service, options);
+
+                using (var webDriver = new ChromeDriver(service, options))
                 {
                     webDriver.Manage().Window.Maximize();
 
-                    //webDriver.Manage().Timeouts().ImplicitWait =  TimeSpan.FromSeconds(30);
+                    WebDriverWait wait = new(webDriver, TimeSpan.FromSeconds(30));
 
-                    WebDriverWait wait = new(webDriver, TimeSpan.FromSeconds(50));
+                    webDriver.Navigate().GoToUrl("https://www.corsan.com.br/inicial");
 
-                    webDriver.Navigate().GoToUrl("https://www.corsan.com.br/");
-
-                    //webDriver.FindElement(By.Id("matriz2-cookie-confirmation-button")).Click();
                     wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("matriz2-cookie-confirmation-button"))).Click();
-                    Thread.Sleep(1000);
 
-                    //webDriver.FindElement(By.XPath("/html/body/div[6]/div[1]/div/div[2]/section/div[2]/div/div[1]/div/a")).Click();
-                    wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/div[6]/div[1]/div/div[2]/section/div[2]/div/div[1]/div/a"))).Click();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(3000);
+                    wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"bodyPrincipal\"]/div[6]/div[1]/div/div[2]/section/div[2]/div/div[1]/div/h2/a"))).Click();
 
-                    //webDriver.FindElement(By.XPath("/html/body/div[2]/div/div/div/div[1]/form/div[1]/div/div[1]/campos/div/input")).SendKeys(cpf.Trim());
+                    Thread.Sleep(2000);
+                    wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/div[2]/div/div/div/div[1]/form/div[1]/div/div[1]/campos/div/input"))).Click();
                     wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/div[2]/div/div/div/div[1]/form/div[1]/div/div[1]/campos/div/input"))).SendKeys(cpf.Trim());
-                    Thread.Sleep(1000);
 
+                    Thread.Sleep(2000);
+                    wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/div[2]/div/div/div/div[1]/form/div[1]/div/div[2]/campos/div/div/div[3]/input"))).Click();
                     wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/div[2]/div/div/div/div[1]/form/div[1]/div/div[2]/campos/div/div/div[3]/input"))).SendKeys(codigoImovel.Trim());
 
-                    WebDriverWait waitButton = new(webDriver, TimeSpan.FromSeconds(60));
-                    waitButton.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\'page-top\']/div[2]/div/div/div/div[1]/form/div[3]/button"))).Click();
-                    Thread.Sleep(1000);
-
-                    //var table  = webDriver.FindElement(By.XPath("//*[@id=\"page-top\"]/div[2]/div/div/div/div[1]/form/div[1]/div[2]/div/table"));
-                    var table = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"page-top\"]/div[2]/div/div/div/div[1]/form/div[1]/div[2]/div/table")));
                     Thread.Sleep(2000);
+                    IWebElement button = wait.Until(ExpectedConditions.ElementToBeClickable(By.ClassName("btn-lg")));
+                    IJavaScriptExecutor js = (IJavaScriptExecutor)webDriver;
+                    js.ExecuteScript("arguments[0].click();", button);
+                    //wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\'page-top\']/div[2]/div/div/div/div[1]/form/div[3]/button"))).SendKeys(Keys.Enter);
 
-                    //var rows = table.FindElements(By.XPath("//*[@id=\"page-top\"]/div[2]/div/div/div/div[1]/form/div[1]/div[2]/div/table/tbody/tr"));
+                    Thread.Sleep(3000);
+                    var table = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"page-top\"]/div[2]/div/div/div/div[1]/form/div[1]/div[2]/div/table")));
                     var rows = table.FindElements(By.XPath("//*[@id=\"page-top\"]/div[2]/div/div/div/div[1]/form/div[1]/div[2]/div/table/tbody/tr"));
-                    Thread.Sleep(1000);
 
-                    for (int i = 1; i < 4; i++)
+                    for (int i = 1; i < 3; i++)
                     {
-                        Thread.Sleep(1000);
                         var fileName = $"{wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath($"//*[@id=\"page-top\"]/div[2]/div/div/div/div[1]/form/div[1]/div[2]/div/table/tbody/tr[{i}]/td[2]"))).Text}.pdf";
-                        //var fileName = $"{webDriver.FindElement(By.XPath($"//*[@id=\"page-top\"]/div[2]/div/div/div/div[1]/form/div[1]/div[2]/div/table/tbody/tr[{i}]/td[2]")).Text}.pdf";
-
-                        Thread.Sleep(1000);
                         var status = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath($"//*[@id=\"page-top\"]/div[2]/div/div/div/div[1]/form/div[1]/div[2]/div/table/tbody/tr[{i}]/td[5]"))).Text;
-                        //var status = webDriver.FindElement(By.XPath($"//*[@id=\"page-top\"]/div[2]/div/div/div/div[1]/form/div[1]/div[2]/div/table/tbody/tr[{i}]/td[5]")).Text;
-
-                        Thread.Sleep(1000);
                         var locator = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath($"//*[@id=\"page-top\"]/div[2]/div/div/div/div[1]/form/div[1]/div[2]/div/table/tbody/tr[{i}]/td[6]/i")));
-                        //var locator = webDriver.FindElement(By.XPath($"//*[@id=\"page-top\"]/div[2]/div/div/div/div[1]/form/div[1]/div[2]/div/table/tbody/tr[{i}]/td[6]/i"));
-
-                        Thread.Sleep(1000);
                         wait.Until(ExpectedConditions.ElementToBeClickable(locator)).Click();
-                        //locator.Click();
-
-                        Thread.Sleep(1000);
                         wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/div[7]/div/div[4]/div[2]/button"))).Click();
-                        //webDriver.FindElement(By.XPath("/html/body/div[7]/div/div[4]/div[2]/button")).Click();
 
                         var oldFilePath = System.IO.Path.Combine(_downloadDirectory, "arquivo.pdf");
-
                         var newFilePath = System.IO.Path.Combine($"{_downloadDirectory}{fileName}");
 
                         if (File.Exists(System.IO.Path.Combine(_downloadDirectory, fileName)))
@@ -114,24 +99,7 @@ namespace EasyInvoice.API.Services
                             File.Delete(System.IO.Path.Combine(_downloadDirectory, fileName));
                         }
 
-                        Thread.Sleep(1000);
                         File.Move(oldFilePath, newFilePath);
-
-                        WebDriverWait waitButton2 = new(webDriver, TimeSpan.FromSeconds(60));
-                        wait.Until(ExpectedConditions.ElementExists(By.XPath("/html/body/div[6]/div[1]/div/div[2]/section/div[2]/div/div[1]/div/a")));
-                        waitButton2.Until(ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/div[6]/div[1]/div/div[2]/section/div[2]/div/div[1]/div/a"))).Click();
-
-                        WebDriverWait waitTxtCpf = new(webDriver, TimeSpan.FromSeconds(60));
-                        waitTxtCpf.Until(ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/div[2]/div/div/div/div[1]/form/div[1]/div/div[1]/campos/div/input"))).SendKeys(cpf.Trim());
-
-
-                        WebDriverWait waitTxtCodigoImovel = new(webDriver, TimeSpan.FromSeconds(60));
-                        waitTxtCodigoImovel.Until(ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/div[2]/div/div/div/div[1]/form/div[1]/div/div[2]/campos/div/div/div[3]/input"))).SendKeys(codigoImovel.Trim());
-
-
-                        WebDriverWait waitButton1 = new(webDriver, TimeSpan.FromSeconds(60));
-                        waitButton1.Until(ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/div[2]/div/div/div/div[1]/form/div[3]/button"))).Click();
-                        Thread.Sleep(1000);
 
                         containerClient.CreateIfNotExists();
 
@@ -148,8 +116,6 @@ namespace EasyInvoice.API.Services
                         blobClient.Upload(fileStream, true);
                     }
                 }
-
-                statusExec = true;
             }
             catch (Exception)
             {

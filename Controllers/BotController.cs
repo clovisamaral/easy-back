@@ -41,7 +41,7 @@ namespace EasyInvoice.API.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception($"Ocorreu erro no processo de baixar faturas: {ex.Message}");
+                 throw new Exception($"Ocorreu erro no processo de baixar faturas: {ex.Message}");
             }
         }
     }
